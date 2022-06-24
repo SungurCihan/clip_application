@@ -1,8 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:iconly/iconly.dart';
+
 import '../../../core/constants/app/application_constants.dart';
 import '../../../core/constants/image/image_constants.dart';
 import '../../../core/extensions/context_extension.dart';
-import 'package:flutter/material.dart';
-import 'package:iconly/iconly.dart';
 
 class SearchView extends StatelessWidget {
   const SearchView({Key? key}) : super(key: key);

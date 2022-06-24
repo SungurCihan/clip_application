@@ -39,6 +39,24 @@ dependencies:
   flutter_bloc: ^8.0.1
   equatable: ^2.0.3
 
+  #service
+  vexana: ^2.8.0
+  http: ^0.13.4
+
+  #Google
+  json_serializable: ^6.2.0
+  json_annotation: ^4.5.0
+
+  #Firebase
+  firebase_core: ^1.18.0
+  firebase_storage: ^10.2.18
+
+  #Core
+  build_runner: ^2.1.10
+
+
+
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2

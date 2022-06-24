@@ -1,9 +1,19 @@
-import 'package:clip_application/core/constants/app/application_constants.dart';
-import 'package:clip_application/core/constants/image/image_constants.dart';
-import 'package:clip_application/core/extensions/context_extension.dart';
-import 'package:clip_application/core/init/theme/light/color_scheme.dart';
-import 'package:clip_application/product/widgets/button/grey_button.dart';
+import '../../../core/constants/navigation/navigation_constants.dart';
+import '../../../core/init/navigation/navigation_manager.dart';
+import '../widgets/card/profile_star_bar.dart';
+import '../../../product/widgets/card/top_profile.dart';
+
+import '../../../core/constants/app/application_constants.dart';
+import '../../../core/constants/image/image_constants.dart';
+import '../../../core/extensions/context_extension.dart';
+import '../../../core/init/theme/light/color_scheme.dart';
+import 'tab_views/post_view.dart';
+import 'tab_views/saloon_photos_view.dart';
+import 'tab_views/social_media_links_view.dart';
+import 'tab_views/videos_view.dart';
+import '../../../product/widgets/button/grey_button.dart';
 import 'package:flutter/material.dart';
+import 'package:iconly/iconly.dart';
 import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
 
 import '../../../product/widgets/card/logo.dart';
@@ -11,41 +21,88 @@ import '../../../product/widgets/card/story_cart.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _appBar(context),
       backgroundColor: context.colorScheme.onPrimary,
       body: Column(
+        children: [_topSide(context), _bottomSide(context)],
+      ),
+    );
+  }
+
+  Container _bottomSide(BuildContext context) {
+    return Container(
+        margin: EdgeInsets.only(top: context.height * 2),
+        height: context.height * 44,
+        clipBehavior: Clip.hardEdge,
+        decoration: BoxDecoration(
+            color: context.colorScheme.background,
+            borderRadius: BorderRadius.all(
+                Radius.circular(ApplicationConstants.radius * 2))),
+        child: DefaultTabController(
+            length: 4,
+            child: Scaffold(
+              appBar: AppBar(
+                elevation: 0,
+                automaticallyImplyLeading: false,
+                backgroundColor: context.colorScheme.background,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                        topLeft:
+                            Radius.circular(ApplicationConstants.radius * 2),
+                        topRight:
+                            Radius.circular(ApplicationConstants.radius * 2))),
+                actions: [
+                  Expanded(
+                    child: TabBar(
+                        indicatorColor: context.colorScheme.secondary,
+                        tabs: [
+                          Tab(
+                              icon: Icon(IconlyLight.category,
+                                  color: context.colorScheme.onSecondary)),
+                          Tab(
+                            icon: Icon(IconlyLight.video,
+                                color: context.colorScheme.onSecondary),
+                          ),
+                          Tab(
+                            icon: Icon(IconlyLight.image,
+                                color: context.colorScheme.onSecondary),
+                          ),
+                          Tab(
+                            icon: Icon(IconlyLight.chart,
+                                color: context.colorScheme.onSecondary),
+                          ),
+                        ]),
+                  ),
+                ],
+              ),
+              body: const TabBarView(children: [
+                PostsView(),
+                VideosView(),
+                SaloonPhotosView(),
+                SocialMediaLinksView()
+              ]),
+            )));
+  }
+
+  Container _topSide(BuildContext context) {
+    return Container(
+      height: context.height * 44,
+      decoration: BoxDecoration(
+        color: context.colorScheme.background,
+        borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(ApplicationConstants.radius * 2),
+            bottomRight: Radius.circular(ApplicationConstants.radius * 2)),
+      ),
+      child: Column(
         children: [
-          Container(
-            height: context.height * 44,
-            decoration: BoxDecoration(
-              color: context.colorScheme.background,
-              borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(ApplicationConstants.radius * 2),
-                  bottomRight:
-                      Radius.circular(ApplicationConstants.radius * 2)),
-            ),
-            child: Column(
-              children: [
-                Expanded(flex: 3, child: _topProfile(context)),
-                Expanded(flex: 2, child: _starPart(context)),
-                Expanded(flex: 3, child: _buttons(context)),
-                Expanded(flex: 2, child: _stories(context)),
-                const Expanded(flex: 1, child: SizedBox())
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(top: context.height * 2),
-            height: context.height * 44,
-            decoration: BoxDecoration(
-                color: context.colorScheme.background,
-                borderRadius: BorderRadius.all(
-                    Radius.circular(ApplicationConstants.radius * 2))),
-          )
+          const Expanded(flex: 3, child: TopProfile()),
+          const Expanded(flex: 2, child: ProfileStarBar()),
+          Expanded(flex: 3, child: _buttons(context)),
+          Expanded(flex: 2, child: _stories(context)),
+          const Expanded(flex: 1, child: SizedBox())
         ],
       ),
     );
@@ -85,11 +142,14 @@ class ProfileView extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Expanded(
+              Expanded(
                   flex: 4,
                   child: GreyButton(
-                    text: 'Detaylar',
-                  )),
+                      text: 'Detaylar',
+                      onTap: () {
+                        NavigationManager.instance.navigateToPage(
+                            path: NavigationCostants.profileDetail);
+                      })),
               SizedBox(
                 width: context.width * 2,
               ),
@@ -122,20 +182,20 @@ class ProfileView extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(
+            const Expanded(
                 flex: 8,
                 child: Text(
                   'The Barber',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 18),
                 )),
-            Expanded(flex: 1, child: SizedBox()),
+            const Expanded(flex: 1, child: SizedBox()),
             VerticalDivider(
               color: context.colorScheme.secondary,
               indent: context.height * 3.5,
               endIndent: context.height * 3.5,
             ),
-            Expanded(flex: 1, child: SizedBox()),
+            const Expanded(flex: 1, child: SizedBox()),
             Expanded(
               flex: 8,
               child: Center(

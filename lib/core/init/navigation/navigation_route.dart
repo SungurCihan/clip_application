@@ -1,7 +1,8 @@
-import 'package:clip_application/features/profile/view/profile_view.dart';
 import 'package:flutter/material.dart';
 
 import '../../../features/home/view/bottom_page_route.dart';
+import '../../../features/profile/view/profile_detail_view.dart';
+import '../../../features/profile/view/profile_view.dart';
 import '../../../features/registration/view/login_screen.dart';
 import '../../../features/registration/view/sign_screen.dart';
 import '../../../product/widgets/card/not_found_navigation.dart';
@@ -16,13 +17,15 @@ class NavigationRoute {
   Route<dynamic> generateRoutes(RouteSettings args) {
     switch (args.name) {
       case NavigationCostants.sign:
-        return normalNavigate(const SignScreen());
+        return normalNavigate(SignScreen());
       case NavigationCostants.login:
-        return normalNavigate(const LoginScreen());
+        return normalNavigate(LoginScreen());
       case NavigationCostants.home:
         return normalNavigate(const BottomPageRoute());
       case NavigationCostants.profile:
         return normalNavigate(const ProfileView());
+      case NavigationCostants.profileDetail:
+        return normalNavigate(const ProfileDetailView());
       default:
         return MaterialPageRoute(
             builder: (context) => const NotFoundNavigation());

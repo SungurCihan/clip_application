@@ -1,5 +1,7 @@
-import 'package:clip_application/core/init/theme/light/text_scheme.dart';
-import 'package:clip_application/product/widgets/button/grey_button.dart';
+import '../../../product/widgets/card/map.dart';
+
+import '../../../core/init/theme/light/text_scheme.dart';
+import '../../../product/widgets/button/grey_button.dart';
 
 import '../../../core/constants/app/application_constants.dart';
 import '../../../core/constants/image/image_constants.dart';
@@ -20,24 +22,7 @@ class AppointmentView extends StatelessWidget {
       backgroundColor: context.colorScheme.onPrimary,
       body: SingleChildScrollView(
         child: Column(
-          children: [
-            Container(
-              height: context.height * 50,
-              decoration: BoxDecoration(
-                color: context.colorScheme.background,
-                borderRadius: BorderRadius.only(
-                    bottomLeft:
-                        Radius.circular(ApplicationConstants.radius * 3),
-                    bottomRight:
-                        Radius.circular(ApplicationConstants.radius * 3)),
-              ),
-              child: _map(
-                context,
-              ),
-            ),
-            _calender(context),
-            _favourites(context)
-          ],
+          children: [_map(context), _calender(context), _favourites(context)],
         ),
       ),
     );
@@ -147,40 +132,35 @@ class AppointmentView extends StatelessWidget {
     );
   }
 
-  Column _map(
+  Widget _map(
     BuildContext context,
   ) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Container(
-          height: context.height * 40,
-          width: context.width * 90,
-          padding: context.paddingMedium,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(ImageConstants.instance.map),
-                  fit: BoxFit.cover)),
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: context.width * 5),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              GreyButton(
-                text: 'Kuaförleri Listele',
-                width: context.width * 40,
-                textStyle: TextThemeLight.instance.blueSmallFont,
-              ),
-              GreyButton(
-                text: 'Yol Tarifi Al',
-                width: context.width * 40,
-                textStyle: TextThemeLight.instance.blueSmallFont,
-              )
-            ],
+    return Container(
+        height: context.height * 50,
+        decoration: BoxDecoration(
+            color: context.colorScheme.background,
+            borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(ApplicationConstants.radius * 3),
+                bottomRight: Radius.circular(ApplicationConstants.radius * 3))),
+        child: Map(
+          bottom: Padding(
+            padding: EdgeInsets.symmetric(horizontal: context.width * 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GreyButton(
+                  text: 'Kuaförleri Listele',
+                  width: context.width * 40,
+                  textStyle: TextThemeLight.instance.blueSmallFont,
+                ),
+                GreyButton(
+                  text: 'Yol Tarifi Al',
+                  width: context.width * 40,
+                  textStyle: TextThemeLight.instance.blueSmallFont,
+                )
+              ],
+            ),
           ),
-        )
-      ],
-    );
+        ));
   }
 }

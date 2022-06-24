@@ -1,5 +1,7 @@
-import 'package:clip_application/core/init/theme/light/text_scheme.dart';
-import 'package:clip_application/product/widgets/button/grey_button.dart';
+import '../../../product/widgets/card/top_profile.dart';
+
+import '../../../core/init/theme/light/text_scheme.dart';
+import '../../../product/widgets/button/grey_button.dart';
 
 import '../../../core/constants/app/application_constants.dart';
 import '../../../core/constants/image/image_constants.dart';
@@ -16,7 +18,7 @@ class AccountView extends StatelessWidget {
     return Scaffold(
       backgroundColor: context.colorScheme.background,
       body: ListView(
-        children: [_topSide(context), _midSide(context), _bottomSide(context)],
+        children: [const TopProfile(), _midSide(context), _bottomSide(context)],
       ),
     );
   }

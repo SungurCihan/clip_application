@@ -1,13 +1,16 @@
-import '../../../../core/constants/app/application_constants.dart';
-import '../../../../core/extensions/context_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:iconly/iconly.dart';
 
+import '../../../../core/constants/app/application_constants.dart';
+import '../../../../core/extensions/context_extension.dart';
+
 class AccountButton extends StatelessWidget {
   final Icon? icon;
+  final Icon? suffixIcon;
   final String? text;
 
-  const AccountButton({Key? key, this.icon, this.text}) : super(key: key);
+  const AccountButton({Key? key, this.icon, this.text, this.suffixIcon})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,20 +23,25 @@ class AccountButton extends StatelessWidget {
       width: context.width * 90,
       height: context.width * 10,
       child: Padding(
-        padding: context.paddingMediumLeft,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            icon ?? const Icon(IconlyLight.message),
-            SizedBox(
-              width: context.mediumValue,
-            ),
-            Text(
-              text ?? '',
-            )
-          ],
-        ),
-      ),
+          padding: context.paddingMediumLeft,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  icon ?? const Icon(IconlyLight.message),
+                  SizedBox(
+                    width: context.mediumValue,
+                  ),
+                  Text(
+                    text ?? '',
+                  )
+                ],
+              ),
+              Padding(padding: context.paddingMediumRight, child: suffixIcon)
+            ],
+          )),
     );
   }
 }

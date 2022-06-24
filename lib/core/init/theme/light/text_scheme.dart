@@ -1,6 +1,6 @@
-import '../../../constants/app/application_constants.dart';
 import 'package:flutter/material.dart';
 
+import '../../../constants/app/application_constants.dart';
 import 'color_scheme.dart';
 
 class TextThemeLight {

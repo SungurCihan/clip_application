@@ -1,11 +1,11 @@
-import '../../../core/constants/navigation/navigation_constants.dart';
-import '../../../core/init/navigation/navigation_manager.dart';
+import 'package:flutter/material.dart';
 
+import '../../../core/constants/navigation/navigation_constants.dart';
 import '../../../core/extensions/context_extension.dart';
+import '../../../core/init/navigation/navigation_manager.dart';
+import '../../../product/widgets/card/logo.dart';
 import '../widgets/button/custom_text_button.dart';
 import '../widgets/button/pink_button.dart';
-import '../../../product/widgets/card/logo.dart';
-import 'package:flutter/material.dart';
 
 class LoginOrSign extends StatelessWidget {
   const LoginOrSign({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class LoginOrSign extends StatelessWidget {
             children: [
               const Expanded(flex: 4, child: Logo()),
               const Expanded(flex: 1, child: SizedBox()), //Space
-              Expanded(flex: 2, child: _buttons()),
+              Expanded(flex: 2, child: _buttons(context)),
               const Expanded(flex: 2, child: SizedBox()) //Space
             ],
           ),
@@ -31,12 +31,15 @@ class LoginOrSign extends StatelessWidget {
     );
   }
 
-  Widget _buttons() {
+  Widget _buttons(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         PinkButton(
-          text: 'Kayıt Ol',
+          child: Text(
+            'Kayıt Ol',
+            style: context.textTheme.bodyText1,
+          ),
           onTap: () {
             NavigationManager.instance
                 .navigateToPage(path: NavigationCostants.sign);

@@ -9,13 +9,15 @@ class CustomTextFormField extends StatefulWidget {
   final TextEditingController textEditingController;
   final Widget? prefixIcon;
   bool? isPassword;
+  final String? Function(String?)? validator;
 
   CustomTextFormField(
       {Key? key,
       this.hintText,
       required this.textEditingController,
       this.isPassword,
-      this.prefixIcon})
+      this.prefixIcon,
+      this.validator})
       : super(key: key);
 
   @override
@@ -32,6 +34,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       height: context.height * 5,
       decoration: _boxDecoration(),
       child: TextFormField(
+        validator: widget.validator,
         controller: widget.textEditingController,
         obscureText: widget.isPassword == true ? !_isVisible : _isVisible,
         decoration: _inputDecoration(context),

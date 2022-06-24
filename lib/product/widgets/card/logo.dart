@@ -16,9 +16,9 @@ class Logo extends StatelessWidget {
         height: height ?? context.height * 20,
         decoration: BoxDecoration(
             image: DecorationImage(
-          image: AssetImage(
-            ImageConstants.instance.logo,
-          ),
-        )));
+                image: AssetImage(
+                  ImageConstants.instance.logo,
+                ),
+                fit: BoxFit.contain)));
   }
 }

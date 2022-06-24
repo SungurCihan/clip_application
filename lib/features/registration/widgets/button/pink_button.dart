@@ -5,10 +5,10 @@ import '../../../../core/extensions/context_extension.dart';
 import '../../../../product/widgets/ui/shadow_constant.dart';
 
 class PinkButton extends StatelessWidget {
-  final String? text;
+  final Widget? child;
   final VoidCallback? onTap;
 
-  const PinkButton({Key? key, this.text, this.onTap}) : super(key: key);
+  const PinkButton({Key? key, this.onTap, this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,12 +22,7 @@ class PinkButton extends StatelessWidget {
             borderRadius:
                 BorderRadius.all(Radius.circular(ApplicationConstants.radius)),
             boxShadow: [ShadowConstant.boxShadow]),
-        child: Center(
-          child: Text(
-            text ?? '',
-            style: context.textTheme.bodyText1,
-          ),
-        ),
+        child: Center(child: child),
       ),
     );
   }
